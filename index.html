@@ -1,11 +1,151 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>DRONAAI Landing Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRONA AI - Coming Soon</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6e48aa, #9d50bb);
+            color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .coming-soon {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .founder {
+            margin-top: 2rem;
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .countdown-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 5px;
+            min-width: 80px;
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .social-links {
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+            text-shadow: 0 0 10px rgba(255,255,255,0.7);
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to DRONAAI</h1>
-    <img src="images/2461221.jpg" alt="DRONAAI Image">
+    <div class="container">
+        <div class="logo">DRONA AI</div>
+        <div class="tagline">The Next Generation AI Tutoring Platform</div>
+        <div class="coming-soon">Coming in a few weeks!</div>
+        
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div>Days</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div>Hours</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div>Minutes</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div>Seconds</div>
+            </div>
+        </div>
+        
+        <div class="founder">Founded by Prakhar Pandey</div>
+        
+        <div class="social-links">
+            <a href="#" target="_blank">📧</a>
+            <a href="#" target="_blank">🐦</a>
+            <a href="#" target="_blank">📱</a>
+            <a href="#" target="_blank">💼</a>
+        </div>
+    </div>
+
+    <script>
+        // Set the launch date (adjust as needed)
+        const launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 21); // 3 weeks from now
+        
+        function updateCountdown() {
+            const now = new Date();
+            const diff = launchDate - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Update every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+    </script>
 </body>
 </html>
