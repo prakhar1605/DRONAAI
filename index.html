@@ -5,147 +5,221 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DRONA AI - Coming Soon</title>
     <style>
+        :root {
+            --primary: #6e48aa;
+            --secondary: #9d50bb;
+            --accent: #4776E6;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --neon: #00f2fe;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;600&display=swap');
+        
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #6e48aa, #9d50bb);
-            color: white;
             margin: 0;
             padding: 0;
-            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark), #16213e);
+            color: var(--light);
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
+        }
+        
+        /* Header at the very top */
+        .header {
+            width: 100%;
+            padding: 1.5rem 0;
             text-align: center;
+            background: rgba(26, 26, 46, 0.8);
+            border-bottom: 1px solid rgba(110, 72, 170, 0.3);
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
         }
         
-        .container {
-            max-width: 800px;
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin: 0;
+            background: linear-gradient(to right, var(--primary), var(--neon));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        /* Main content centered below header */
+        .main-content {
+            margin-top: 120px; /* Space for fixed header */
+            text-align: center;
             padding: 2rem;
+            width: 90%;
+            max-width: 800px;
         }
         
-        .logo {
-            font-size: 3.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .tagline {
+        h2 {
+            font-weight: 300;
             font-size: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             opacity: 0.9;
         }
         
-        .coming-soon {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            background: rgba(255,255,255,0.2);
-            padding: 1rem;
-            border-radius: 10px;
-            display: inline-block;
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem 1rem;
+            min-width: 120px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(110, 72, 170, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .countdown-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(110, 72, 170, 0.3);
+            background: rgba(110, 72, 170, 0.1);
+        }
+        
+        .countdown-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--neon);
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+            margin-bottom: 0.5rem;
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.7);
         }
         
         .founder {
-            margin-top: 2rem;
-            font-style: italic;
-            opacity: 0.8;
+            margin-top: 3rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: normal; /* Changed from italic to normal */
+            font-weight: 400;
+            position: relative;
+            display: inline-block;
+            padding-top: 1rem;
         }
         
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
+        .founder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
         }
         
-        .countdown-item {
-            background: rgba(255,255,255,0.1);
-            padding: 1rem;
-            border-radius: 5px;
-            min-width: 80px;
+        /* Animated background elements */
+        .tech-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(110, 72, 170, 0.3);
+            z-index: -1;
         }
         
-        .countdown-number {
-            font-size: 2rem;
-            font-weight: bold;
+        .tech-circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            right: -150px;
+            animation: float 15s infinite alternate;
         }
         
-        .social-links {
-            margin-top: 2rem;
+        .tech-circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            left: -100px;
+            animation: float 12s infinite alternate-reverse;
         }
         
-        .social-links a {
-            color: white;
-            margin: 0 10px;
-            font-size: 1.5rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(20px, 20px) rotate(5deg); }
         }
         
-        .social-links a:hover {
-            transform: translateY(-3px);
-            text-shadow: 0 0 10px rgba(255,255,255,0.7);
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+            }
+            
+            .countdown-box {
+                min-width: 80px;
+                padding: 1rem 0.5rem;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                margin-top: 100px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">DRONA AI</div>
-        <div class="tagline">The Next Generation AI Tutoring Platform</div>
-        <div class="coming-soon">Coming in a few weeks!</div>
+    <!-- Animated background elements -->
+    <div class="tech-circle"></div>
+    <div class="tech-circle"></div>
+    
+    <!-- Header fixed at top -->
+    <header class="header">
+        <h1>DRONA AI</h1>
+    </header>
+    
+    <!-- Main content -->
+    <main class="main-content">
+        <h2>The Next Generation AI Tutoring Platform</h2>
         
-        <div class="countdown">
-            <div class="countdown-item">
-                <div class="countdown-number" id="days">00</div>
-                <div>Days</div>
+        <div class="countdown-container">
+            <div class="countdown-box">
+                <div class="countdown-value">20</div>
+                <div class="countdown-label">Days</div>
             </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="hours">00</div>
-                <div>Hours</div>
+            <div class="countdown-box">
+                <div class="countdown-value">23</div>
+                <div class="countdown-label">Hours</div>
             </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="minutes">00</div>
-                <div>Minutes</div>
+            <div class="countdown-box">
+                <div class="countdown-value">59</div>
+                <div class="countdown-label">Minutes</div>
             </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="seconds">00</div>
-                <div>Seconds</div>
+            <div class="countdown-box">
+                <div class="countdown-value">47</div>
+                <div class="countdown-label">Seconds</div>
             </div>
         </div>
         
         <div class="founder">Founded by Prakhar Pandey</div>
-        
-        <div class="social-links">
-            <a href="#" target="_blank">📧</a>
-            <a href="#" target="_blank">🐦</a>
-            <a href="#" target="_blank">📱</a>
-            <a href="#" target="_blank">💼</a>
-        </div>
-    </div>
-
-    <script>
-        // Set the launch date (adjust as needed)
-        const launchDate = new Date();
-        launchDate.setDate(launchDate.getDate() + 21); // 3 weeks from now
-        
-        function updateCountdown() {
-            const now = new Date();
-            const diff = launchDate - now;
-            
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
-        
-        // Update every second
-        setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call
-    </script>
+    </main>
 </body>
 </html>
